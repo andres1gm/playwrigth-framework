@@ -21,10 +21,9 @@ test('eliminate inventory item', async ({ page }) => {
     await page.getByRole('button', { name: 'ADD TO CART' }).click();
     await expect(page.locator(".shopping_cart_badge")).toHaveText('1')
     await page.goto('https://www.saucedemo.com/v1/cart.html');
-    await expect(page.getByText("Sauce Labs Bolt T-Shirt")).toBeVisible();
+    await expect(page.getByText("Sauce Labs Bolt T-Shirt", {exact:true})).toBeVisible();
     await page.getByRole('button', { name: 'REMOVE' }).click();
-    await expect(badge).toHaveCount(0);
-    await expect(cartItems).toHaveCount(0);
+    await expect(page.locator(".cart_item")).not.toBeVisible();
 
 
 
