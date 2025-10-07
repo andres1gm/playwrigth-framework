@@ -7,11 +7,12 @@ test('validate eliminate inventory item', async ({ page }) => {
     await page.getByRole('button', { name: "LOGIN" }).click();
     await page.getByRole('link', { name: "Sauce Labs Bike Light" }).click();
     await page.getByRole('button', { name: 'ADD TO CART' }).click();
-    await page.goto('https://www.saucedemo.com/v1/inventory.html');
+    await page.locator(".bm-burger-button").click();
+    await page.getByRole('link', { name: "All Items", exact:true }).click();
     await page.getByRole('link', { name: "Sauce Labs Onesie" }).click();
     await page.getByRole('button', { name: 'ADD TO CART' }).click();
     await expect(page.locator(".shopping_cart_badge")).toHaveText('2')
-    await page.goto('https://www.saucedemo.com/v1/cart.html');
+    await page.locator("#shopping_cart_container").click();
     await expect(page.getByText("Sauce Labs Bike Light")).toBeVisible();
     await expect(page.getByText("Sauce Labs Onesie")).toBeVisible();
     await page.getByRole('button', { name: 'REMOVE' }).first().click();
